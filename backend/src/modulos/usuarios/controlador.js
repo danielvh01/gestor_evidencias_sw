@@ -47,15 +47,14 @@ module.exports = function(dbinyectada){
         return respuesta2
     }
 
-    function eliminar(body)
-    {
-        return db.eliminar(TABLA,body);
+    function desactivar(id, body) {
+        return db.actualizar(TABLA, id, body, 'usr_id');
     }
 
     return {
         todos,
         uno,
-        eliminar,
+        desactivar,
         agregar
     }
 }

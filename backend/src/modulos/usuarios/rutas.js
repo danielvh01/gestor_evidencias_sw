@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/',seguridad(),todos);
 router.get('/:id',seguridad(), uno);
 router.post('/',agregar)
-router.delete('/',seguridad(), eliminar);
+router.delete('/:id',seguridad(), desactivar);
 
 async function todos(req,res,next){
     
@@ -51,14 +51,15 @@ async function agregar(req,res,next){
     }
 };
 
-async function eliminar(req,res,next){
-    try{
-        const items = await controlador.eliminar(req.body);
-        respuesta.success(req,res,'Item eliminado satisfactoriamente',200);
-    }
-    catch(err){
+async function desactivar(req, res, next) {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const result = await controlador.desactivar(id, data);
+        respuesta.success(req, res, 'Usuario desactivado.', 200);
+    } catch (err) {
         next(err);
     }
-};
+}
 
 module.exports = router;

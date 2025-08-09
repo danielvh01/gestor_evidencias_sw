@@ -44,7 +44,7 @@ async function todos(tabla) {
     }
 }
 
-async function uno(tabla, id) {
+async function uno(tabla, id, idColumn = 'id') {
     try {
         const result = await pool.request()
             .input('id', sql.Int, id)
@@ -98,29 +98,37 @@ async function agregar(tabla, data, idColumn = null) {
 
 
 
-async function actualizar(tabla, id, data) {
+async function actualizar(tabla, id, data, idColumn = 'id') {
     try {
-        const setClause = Object.keys(data).map((k, i) => `[${k}] = @val${i}`).join(', ');
+        console.log(data);
+
+        const dataFiltrada = idColumn
+            ? Object.fromEntries(
+                Object.entries(data).filter(([key]) => key.toLowerCase() !== idColumn.toLowerCase())
+              )
+            : data;
+
+        const setClause = Object.keys(dataFiltrada).map((k, i) => `[${k}] = @val${i}`).join(', ');
 
         const request = pool.request();
-        Object.values(data).forEach((val, i) => {
+        Object.values(dataFiltrada).forEach((val, i) => {
             request.input(`val${i}`, val);
         });
         request.input('id', sql.Int, id);
 
-        const result = await request.query(`UPDATE ${tabla} SET ${setClause} WHERE id = @id`);
+        const result = await request.query(`UPDATE ${tabla} SET ${setClause} WHERE ${idColumn} = @id`);
         return result.rowsAffected[0];
     } catch (err) {
         throw err;
     }
 }
 
-async function eliminar(tabla, id) {
+async function eliminar(tabla, id, idColumn = 'id') {
     try {
         const result = await pool.request()
-            .input('id', sql.Int, id)
-            .query(`DELETE FROM ${tabla} WHERE id = @id`);
-        return result.rowsAffected[0];
+        .input('id', sql.Int, id)
+        .query(`DELETE FROM ${tabla} WHERE ${idColumn} = @id`);
+    return result.rowsAffected[0];
     } catch (err) {
         throw err;
     }
