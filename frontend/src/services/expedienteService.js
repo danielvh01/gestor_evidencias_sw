@@ -5,3 +5,7 @@ export async function getExpedientes() {
   return response.data.body || [];
 }
 
+export async function crearExpediente(expediente) {
+  const response = await apiClient.post("/expedientes", expediente);
+  return response.data;
+}

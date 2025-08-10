@@ -1,13 +1,20 @@
 import React from "react";
 
-function ExpedientesTable({ expedientes, expandedId, toggleEvidencias, evidencias ,expedientesConEvidencias}) {
+function ExpedientesTable({
+  expedientes,
+  expandedId,
+  toggleEvidencias,
+  evidencias,
+  expedientesConEvidencias,
+  onAgregarEvidencia, // callback para agregar evidencia
+}) {
   return (
     <table border="1" cellPadding="5">
       <thead>
         <tr>
           <th>ID de expediente</th>
           <th>Fecha Registro</th>
-          <th>ID del tecnico</th>
+          <th>ID del técnico</th>
           <th>Estado</th>
           <th>Acciones</th>
         </tr>
@@ -22,26 +29,37 @@ function ExpedientesTable({ expedientes, expandedId, toggleEvidencias, evidencia
               <td>{exp.exp_estado}</td>
               <td>
                 <button
-                    onClick={() => toggleEvidencias(exp.exp_id)}
-                    hidden={!expedientesConEvidencias.has(exp.exp_id)}
-                    >
-                    {expandedId === exp.exp_id ? "Ocultar evidencias" : "Ver evidencias"}
-                    </button>
+                  onClick={() => toggleEvidencias(exp.exp_id)}
+                  hidden={!expedientesConEvidencias.has(exp.exp_id)}
+                >
+                  {expandedId === exp.exp_id ? "Ocultar evidencias" : "Ver evidencias"}
+                </button>
+
+                {/* Botón para agregar evidencia */}
+                <button
+                  style={{ marginLeft: "8px" }}
+                  onClick={() => onAgregarEvidencia(exp.exp_id)}
+                >
+                  + Agregar Evidencia
+                </button>
               </td>
             </tr>
-
             {expandedId === exp.exp_id && evidencias[exp.exp_id] && (
-              <tr>
+            <tr>
                 <td colSpan="5">
-                  <div>
-                    <p><strong>Descripción:</strong> {evidencias[exp.exp_id].evi_descripcion}</p>
-                    <p><strong>Color:</strong> {evidencias[exp.exp_id].evi_color}</p>
-                    <p><strong>Tamaño:</strong> {evidencias[exp.exp_id].evi_tamano}</p>
-                    <p><strong>Peso:</strong> {evidencias[exp.exp_id].evi_peso}</p>
-                    <p><strong>Ubicación:</strong> {evidencias[exp.exp_id].evi_ubicacion}</p>
-                  </div>
+                <div>
+                    {evidencias[exp.exp_id].map((evi) => (
+                    <div key={evi.evi_id} style={{ marginBottom: "12px", padding: "8px", border: "1px solid #ccc", borderRadius: "4px" }}>
+                        <p><strong>Descripción:</strong> {evi.evi_descripcion}</p>
+                        <p><strong>Color:</strong> {evi.evi_color}</p>
+                        <p><strong>Tamaño:</strong> {evi.evi_tamano}</p>
+                        <p><strong>Peso:</strong> {evi.evi_peso}</p>
+                        <p><strong>Ubicación:</strong> {evi.evi_ubicacion}</p>
+                    </div>
+                    ))}
+                </div>
                 </td>
-              </tr>
+            </tr>
             )}
           </React.Fragment>
         ))}

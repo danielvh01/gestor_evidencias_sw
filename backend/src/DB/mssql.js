@@ -49,7 +49,7 @@ async function uno(tabla, id, idColumn = 'id') {
         const result = await pool.request()
             .input('id', sql.Int, id)
             .query(`SELECT * FROM ${tabla} WHERE ${idColumn} = @id`);
-        return result.recordset[0];
+        return result.recordset;
     } catch (err) {
         throw err;
     }

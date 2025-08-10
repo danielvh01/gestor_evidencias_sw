@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getExpedientes } from "../services/expedienteService";
-import { getEvidenciaId } from "../services/evidenciaService";
+import { getExpedientes, crearExpediente } from "../services/expedienteService";
+import { getEvidenciaId, agregarEvidencia } from "../services/evidenciaService";
 import ExpedientesTable from "../components/ExpedientesTable";
+import EvidenciaFormModal from "../components/EvidenciaFormModal";
+import ExpedienteFormModal from "../components/ExpedienteFormModal";
 
 function Expedientes() {
   const [expedientes, setExpedientes] = useState([]);
@@ -10,33 +12,38 @@ function Expedientes() {
   const [loading, setLoading] = useState(true);
   const [expedientesConEvidencias, setExpedientesConEvidencias] = useState(new Set());
 
-    useEffect(() => {
-    async function fetchData() {
-        const data = await getExpedientes();
-        setExpedientes(data);
+  const [modalEvidenciaOpen, setModalEvidenciaOpen] = useState(false);
+  const [expedienteParaEvidencia, setExpedienteParaEvidencia] = useState(null);
 
-        // Para cada expediente, consulta si tiene evidencia:
-        const evidenciasSet = new Set();
+  const [modalExpedienteOpen, setModalExpedienteOpen] = useState(false);
 
-        await Promise.all(
-        data.map(async (exp) => {
-            try {
-            const res = await getEvidenciaId(exp.exp_id);
-            if (res && Object.keys(res).length > 0) {
-                evidenciasSet.add(exp.exp_id);
-            }
-            } catch {
-            // No hay evidencia o error, no agregar
-            }
-        })
-        );
+  useEffect(() => {
+    cargarExpedientes();
+  }, []);
 
-        setExpedientesConEvidencias(new Set(evidenciasSet));
-        setLoading(false);
-    }
-    fetchData();
-    }, []);
+  async function cargarExpedientes() {
+    setLoading(true);
+    const data = await getExpedientes();
+    setExpedientes(data);
 
+    const evidenciasSet = new Set();
+
+    await Promise.all(
+      data.map(async (exp) => {
+        try {
+          const res = await getEvidenciaId(exp.exp_id);
+          if (res && res.length > 0) {
+            evidenciasSet.add(exp.exp_id);
+          }
+        } catch {
+          // ignorar error
+        }
+      })
+    );
+
+    setExpedientesConEvidencias(new Set(evidenciasSet));
+    setLoading(false);
+  }
 
   const toggleEvidencias = async (id) => {
     if (expandedId === id) {
@@ -53,18 +60,90 @@ function Expedientes() {
     }
   };
 
+  const handleAbrirModalEvidencia = (expId) => {
+    setExpedienteParaEvidencia(expId);
+    setModalEvidenciaOpen(true);
+  };
+
+  const handleCerrarModalEvidencia = () => {
+    setModalEvidenciaOpen(false);
+    setExpedienteParaEvidencia(null);
+  };
+
+  const handleGuardarEvidencia = async (nuevaEvidencia) => {
+    try {
+      await agregarEvidencia(nuevaEvidencia);
+      alert("Evidencia agregada correctamente");
+
+      // Refrescar evidencias
+      const res = await getEvidenciaId(nuevaEvidencia.evi_expediente_id);
+      setEvidencias((prev) => ({ ...prev, [nuevaEvidencia.evi_expediente_id]: res }));
+
+      setExpedientesConEvidencias((prev) => new Set(prev).add(nuevaEvidencia.evi_expediente_id));
+
+      setModalEvidenciaOpen(false);
+      setExpedienteParaEvidencia(null);
+    } catch (error) {
+      console.error("Error al agregar evidencia:", error);
+      alert("Error al agregar evidencia");
+    }
+  };
+
+  const handleAbrirModalExpediente = () => {
+    setModalExpedienteOpen(true);
+  };
+
+  const handleCerrarModalExpediente = () => {
+    setModalExpedienteOpen(false);
+  };
+
+  const handleGuardarExpediente = async (nuevoExpediente) => {
+    try {
+      await crearExpediente(nuevoExpediente);
+      alert("Expediente creado correctamente");
+      setModalExpedienteOpen(false);
+
+      // Recargar expedientes
+      cargarExpedientes();
+    } catch (error) {
+      console.error("Error al crear expediente:", error);
+      alert("Error al crear expediente");
+    }
+  };
+
   if (loading) return <p>Cargando expedientes...</p>;
 
   return (
     <div>
-        <h1>Listado de expedientes</h1>
-        <ExpedientesTable
-          expedientes={expedientes}
-          expandedId={expandedId}
-          toggleEvidencias={toggleEvidencias}
-          evidencias={evidencias}
-          expedientesConEvidencias={expedientesConEvidencias}
+      <h1>Listado de expedientes</h1>
+
+      <button onClick={handleAbrirModalExpediente} style={{ marginBottom: "15px" }}>
+        + Nuevo Expediente
+      </button>
+
+      <ExpedientesTable
+        expedientes={expedientes}
+        expandedId={expandedId}
+        toggleEvidencias={toggleEvidencias}
+        evidencias={evidencias}
+        expedientesConEvidencias={expedientesConEvidencias}
+        onAgregarEvidencia={handleAbrirModalEvidencia}
+      />
+
+      {modalEvidenciaOpen && (
+        <EvidenciaFormModal
+          expedienteId={expedienteParaEvidencia}
+          onClose={handleCerrarModalEvidencia}
+          onSave={handleGuardarEvidencia}
         />
+      )}
+
+      {modalExpedienteOpen && (
+        <ExpedienteFormModal
+          onClose={handleCerrarModalExpediente}
+          onSave={handleGuardarExpediente}
+        />
+      )}
     </div>
   );
 }

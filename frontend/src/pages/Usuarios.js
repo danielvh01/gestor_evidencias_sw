@@ -1,37 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { getUsuarios } from "../services/usuarioService";
+import { getUsuarios, updateUsuario } from "../services/usuarioService";
 import UsuariosTable from "../components/UsuariosTable";
+import UsuarioForm from "../components/UsuarioForm";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingUsuario, setEditingUsuario] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    async function fetchUsuarios() {
-      try {
-        const data = await getUsuarios();
-        setUsuarios(data);
-      } catch (error) {
-        console.error("Error cargando usuarios:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
     fetchUsuarios();
   }, []);
 
-  const toggleActivo = (id) => {
-    setUsuarios((prevUsuarios) =>
-      prevUsuarios.map((usr) =>
-        usr.usr_id === id ? { ...usr, usr_activo: usr.usr_activo ? 0 : 1 } : usr
-      )
-    );
-    // Aquí podrías llamar a API para actualizar estado de usuario
+  async function fetchUsuarios() {
+    setLoading(true);
+    try {
+      const data = await getUsuarios();
+      setUsuarios(data);
+    } catch (error) {
+      console.error("Error cargando usuarios:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const toggleActivo = async (id) => {
+    const usuario = usuarios.find((u) => u.usr_id === id);
+    if (!usuario) return;
+
+    const updated = { ...usuario, usr_activo: usuario.usr_activo ? 0 : 1 };
+    setSaving(true);
+    try {
+      await updateUsuario(updated);
+      await fetchUsuarios();
+    } catch (error) {
+      console.error("Error actualizando usuario:", error);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const editarUsuario = (id) => {
-    alert(`Aquí abres un modal o rediriges para editar usuario ${id}`);
-    // Implementa formulario de edición o navegación a página de edición
+    const usuario = usuarios.find((u) => u.usr_id === id);
+    setEditingUsuario(usuario);
+  };
+
+  const handleSave = async (usuarioActualizado) => {
+    setSaving(true);
+    try {
+      await updateUsuario(usuarioActualizado);
+      setEditingUsuario(null);
+      await fetchUsuarios();
+    } catch (error) {
+      console.error("Error guardando usuario:", error);
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) return <p>Cargando usuarios...</p>;
@@ -44,6 +69,16 @@ function Usuarios() {
         onEditar={editarUsuario}
         onToggleActivo={toggleActivo}
       />
+
+      {editingUsuario && (
+        <UsuarioForm
+          usuario={editingUsuario}
+          onClose={() => setEditingUsuario(null)}
+          onSave={handleSave}
+        />
+      )}
+
+      {saving && <p>Guardando cambios...</p>}
     </div>
   );
 }

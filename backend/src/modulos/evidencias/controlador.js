@@ -17,16 +17,16 @@ module.exports = function(dbinyectada){
 
     function uno(id)
     {
-        return db.uno(TABLA,id,'evi_id');
+        return db.uno(TABLA,id,'evi_expediente_id');
     }
 
     function agregar(body)
     {
-        return db.agregar(TABLA,body, 'evi_expediente_id');
+        return db.agregar(TABLA,body, 'evi_id');
     }
 
     function actualizar(id, body) {
-        return db.actualizar(TABLA, id, body);
+        return db.actualizar(TABLA, id, body, 'evi_id');
     }
 
     function eliminar(id)
