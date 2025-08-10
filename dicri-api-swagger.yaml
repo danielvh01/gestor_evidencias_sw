@@ -1,0 +1,312 @@
+swagger: '2.0'
+info:
+  contact: {}
+  title: DICRI
+  version: 1.0.0
+paths:
+  /api/auth/login:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              password:
+                example: '123'
+                type: string
+              usuario:
+                example: adasdas
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Login
+      description: Login
+      operationId: login
+      summary: Login
+  /api/auth/login/adasdas:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Login
+      description: Get user id
+      operationId: getUserId
+      summary: Get user id
+  /api/evidencias/:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Evidencia
+      description: Obtener evidencias
+      operationId: obtenerEvidencias
+      summary: Obtener evidencias
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              evi_color:
+                example: Negro
+                type: string
+              evi_descripcion:
+                example: Fusil de 9mm recogido.
+                type: string
+              evi_expediente_id:
+                example: 1
+                type: number
+              evi_id:
+                example: 0
+                type: number
+              evi_peso:
+                example: 12.5
+                type: number
+              evi_tamano:
+                example: Mediano
+                type: string
+              evi_tecnico_id:
+                example: 2
+                type: number
+              evi_ubicacion:
+                example: Almacén 5 - Caja 8
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Evidencia
+      description: Crear evidencia
+      operationId: crearEvidencia
+      summary: Crear evidencia
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              evi_color:
+                example: Amarillo
+                type: string
+              evi_descripcion:
+                example: Fragmento de material recolectado
+                type: string
+              evi_expediente_id:
+                example: 1
+                type: number
+              evi_id:
+                example: 1
+                type: number
+              evi_peso:
+                example: 12.5
+                type: number
+              evi_tamano:
+                example: Mediano
+                type: string
+              evi_tecnico_id:
+                example: 1
+                type: number
+              evi_ubicacion:
+                example: Almacén 1 - Caja 3
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Evidencia
+      description: Actualizar Evidencia
+      operationId: actualizarEvidencia
+      summary: Actualizar Evidencia
+  /api/evidencias/1:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Evidencia
+      description: Obtener evidencias especifica
+      operationId: obtenerEvidenciasEspecifica
+      summary: Obtener evidencias especifica
+  /api/expedientes/:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Expediente
+      description: Obtener expedientes
+      operationId: obtenerExpedientes
+      summary: Obtener expedientes
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              exp_estado:
+                example: Pendiente
+                type: string
+              exp_fecha_registro:
+                example: '2025-08-09T01:34:43.630Z'
+                type: string
+              exp_id:
+                example: 0
+                type: number
+              exp_tecnico_id:
+                example: 2
+                type: number
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Expediente
+      description: Crear expediente
+      operationId: crearExpediente
+      summary: Crear expediente
+    put:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              exp_estado:
+                example: Rechazado
+                type: string
+              exp_fecha_registro:
+                example: '2025-08-09T01:34:43.630Z'
+                type: string
+              exp_id:
+                example: 1
+                type: number
+              exp_tecnico_id:
+                example: 3
+                type: number
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Expediente
+      description: Actualizar expediente
+      operationId: actualizarExpediente
+      summary: Actualizar expediente
+  /api/expedientes/1:
+    delete:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Evidencia
+      description: Eliminar evidencia
+      operationId: eliminarEvidencia
+      summary: Eliminar evidencia
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Expediente
+      description: Obtener expediente especifico
+      operationId: obtenerExpedienteEspecifico
+      summary: Obtener expediente especifico
+  /api/usuarios/:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Usuario
+      description: Obtener usuarios
+      operationId: obtenerUsuarios
+      summary: Obtener usuarios
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              usr_activo:
+                example: 0
+                type: number
+              usr_id:
+                example: 1
+                type: number
+              usr_nombre_completo:
+                example: Tony Adalberto Salas
+                type: string
+              usr_rol_id:
+                example: 1
+                type: number
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Usuario
+      description: Actualizar usuario
+      operationId: actualizarUsuario
+      summary: Actualizar usuario
+  /api/usuarios/1:
+    delete:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              usr_activo:
+                example: 1
+                type: number
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Usuario
+      description: Eliminar usuario
+      operationId: eliminarUsuario
+      summary: Eliminar usuario
+  /api/usuarios/11:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Usuario
+      description: Obtener usuario
+      operationId: obtenerUsuario
+      summary: Obtener usuario
+tags:
+  - name: Login
+  - name: Usuario
+  - name: Expediente
+  - name: Evidencia

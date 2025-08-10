@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://192.168.0.30:4000/api", 
+  baseURL: "http://192.168.0.5:4000/api", 
 });
 
 // Interceptor para incluir token en cada petición

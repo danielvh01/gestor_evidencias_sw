@@ -12,10 +12,7 @@ RUN npm run build
 # Etapa 2: Servir con nginx
 FROM nginx:stable-alpine
 
-# Elimina configuración por defecto y copia la nuestra (opcional)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copiamos el build generado por React
+# Copiar el build generado por React
 COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 80

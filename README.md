@@ -38,7 +38,7 @@ cd nombre-repo
 ### 🐳 Paso 2: Levantar la infraestructura
 
 ```bash
-docker-compose up -d --build
+docker compose up --build
 ```
 
 Esto levantará los siguientes servicios:
@@ -55,7 +55,7 @@ Esto levantará los siguientes servicios:
 ### 🐳 Paso 3: Ejecución de scripts iniciales
 
 ```bash
-docker cp \mssqldb\script_inicio.sql musing_meitner:/tmp/script_inicio.sql
+docker exec -it mc-dicri-db
 /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "7J((s&53qG7" -No -i /tmp/script_inicio.sql
 ```
 

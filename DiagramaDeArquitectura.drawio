@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="28.0.9">
+  <diagram name="Arquitectura de infra" id="g7eLapwfm_u73ne1E0tK">
+    <mxGraphModel dx="1870" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YlXoDp45S9kvHVwHZgBR-35" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="502" width="330" height="488" as="geometry" />
+        </mxCell>
+        <mxCell id="067qSdcJ4s0RBRi04QQV-108" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" parent="1" vertex="1">
+          <mxGeometry x="90" y="490" width="42.599999999999994" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="067qSdcJ4s0RBRi04QQV-134" value="Peticion http" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.005;entryY=0.63;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" target="067qSdcJ4s0RBRi04QQV-64" edge="1" source="YlXoDp45S9kvHVwHZgBR-41">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-115" y="717.15" as="sourcePoint" />
+            <mxPoint x="95" y="700.424" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fGLr_DVjbTCq2CvEPewE-11" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Server&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="60" y="457" width="120" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="JR_5QDbrnK81JwSEvoaq-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CBD8E7;dashed=1;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="150" y="553.85" width="240" height="406.15" as="geometry" />
+        </mxCell>
+        <mxCell id="067qSdcJ4s0RBRi04QQV-89" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn2.iconfinder.com/data/icons/boxicons-logos/24/bxl-docker-128.png" parent="1" vertex="1">
+          <mxGeometry x="120" y="535" width="66" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;dashed=1;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="180" y="596" width="180" height="324" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="067qSdcJ4s0RBRi04QQV-64" target="WvCvtcoqEv1TJc5cIs7J-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-12" value="1433:1433" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;labelBackgroundColor=none;" vertex="1" connectable="0" parent="WvCvtcoqEv1TJc5cIs7J-11">
+          <mxGeometry x="-0.2067" y="-2" relative="1" as="geometry">
+            <mxPoint x="-13" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="067qSdcJ4s0RBRi04QQV-64" target="WvCvtcoqEv1TJc5cIs7J-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-14" value="4000:4000" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;labelBackgroundColor=none;textShadow=1;" vertex="1" connectable="0" parent="WvCvtcoqEv1TJc5cIs7J-13">
+          <mxGeometry x="0.1334" y="2" relative="1" as="geometry">
+            <mxPoint y="-17" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-15" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="067qSdcJ4s0RBRi04QQV-64" target="WvCvtcoqEv1TJc5cIs7J-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="067qSdcJ4s0RBRi04QQV-64" value="" style="aspect=fixed;sketch=0;html=1;dashed=0;whitespace=wrap;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];shape=mxgraph.kubernetes.icon2;prIcon=ing" parent="1" vertex="1">
+          <mxGeometry x="138" y="704.3" width="30" height="28.8" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-4" value="Docker" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="523.85" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-5" value="Multi-container deployment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="596" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="WvCvtcoqEv1TJc5cIs7J-8" target="WvCvtcoqEv1TJc5cIs7J-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-8" value="SQL Server 2022" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;dashed=1;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="205" y="652.4" width="120" height="47.6" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="WvCvtcoqEv1TJc5cIs7J-9" target="WvCvtcoqEv1TJc5cIs7J-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-9" value="NodeJs + Express" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;dashed=1;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="205" y="722.2" width="120" height="47.6" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-10" value="Nginx + React App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;dashed=1;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="205" y="791" width="120" height="47.6" as="geometry" />
+        </mxCell>
+        <mxCell id="WvCvtcoqEv1TJc5cIs7J-16" value="8080:80" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;labelBackgroundColor=none;textShadow=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="221" y="757" as="geometry">
+            <mxPoint x="-50" y="29" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YlXoDp45S9kvHVwHZgBR-41" value="Usuario" style="aspect=fixed;sketch=0;html=1;dashed=0;whitespace=wrap;verticalLabelPosition=bottom;verticalAlign=top;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];shape=mxgraph.kubernetes.icon2;prIcon=user" parent="1" vertex="1">
+          <mxGeometry x="-140" y="689.9000000000001" width="60" height="57.6" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

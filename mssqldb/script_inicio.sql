@@ -130,3 +130,4 @@ GO
 GRANT EXECUTE TO forense_user;
 GO
 
+select * from dcri_revision
