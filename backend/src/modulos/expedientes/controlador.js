@@ -26,7 +26,7 @@ module.exports = function(dbinyectada){
     }
 
     function actualizar(id, body) {
-        return db.actualizar(TABLA, id, body);
+        return db.actualizar(TABLA, id, body,'exp_id');
     }
 
     function eliminar(id)

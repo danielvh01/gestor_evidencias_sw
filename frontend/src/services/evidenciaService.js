@@ -12,3 +12,8 @@ export async function agregarEvidencia(evidencia) {
   const response = await apiClient.post("/evidencias", evidencia);
   return response.data;
 }
+
+export async function actualizarEvidencia(evidencia) {
+  const response = await apiClient.put("/evidencias", evidencia);
+  return response.data;
+}

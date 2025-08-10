@@ -11,7 +11,7 @@ router.get('/:id', uno);
 router.post('/',agregar)
 router.patch('/',agregar)
 router.delete('/:id',eliminar);
-router.put('/:id', actualizar);
+router.put('/', actualizar);
 
 
 async function todos(req,res,next){
@@ -55,9 +55,8 @@ async function agregar(req,res,next){
 
 async function actualizar(req, res, next) {
     try {
-        const id = req.params.id;
         const data = req.body;
-        const result = await controlador.actualizar(id, data);
+        const result = await controlador.actualizar(req.body.exp_id, data);
         respuesta.success(req, res, 'Expediente actualizado con éxito', 200);
     } catch (err) {
         next(err);

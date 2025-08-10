@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../services/authService";
 
 const Sidebar = ({ user, onLogout }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -11,6 +12,7 @@ const Sidebar = ({ user, onLogout }) => {
 
   const handleLogout = () => {
     if (onLogout) onLogout();
+    logout();
     navigate("/");
   };
 

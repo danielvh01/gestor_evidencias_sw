@@ -6,7 +6,9 @@ function ExpedientesTable({
   toggleEvidencias,
   evidencias,
   expedientesConEvidencias,
-  onAgregarEvidencia, // callback para agregar evidencia
+  onAgregarEvidencia,// callback para agregar evidencia
+  onEditarExpediente,
+  onEditarEvidencia
 }) {
   return (
     <table border="1" cellPadding="5">
@@ -42,6 +44,13 @@ function ExpedientesTable({
                 >
                   + Agregar Evidencia
                 </button>
+
+                 <button
+                    style={{ marginLeft: "8px" }}
+                    onClick={() => onEditarExpediente(exp)}
+                >
+                Editar
+                </button>
               </td>
             </tr>
             {expandedId === exp.exp_id && evidencias[exp.exp_id] && (
@@ -55,6 +64,10 @@ function ExpedientesTable({
                         <p><strong>Tamaño:</strong> {evi.evi_tamano}</p>
                         <p><strong>Peso:</strong> {evi.evi_peso}</p>
                         <p><strong>Ubicación:</strong> {evi.evi_ubicacion}</p>
+                        {/* Botón para editar evidencia */}
+                        <button onClick={() => onEditarEvidencia(evi)}>
+                          Editar Evidencia
+                        </button>
                     </div>
                     ))}
                 </div>

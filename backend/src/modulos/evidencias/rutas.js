@@ -11,7 +11,7 @@ router.get('/:id', uno);
 router.post('/',agregar)
 router.patch('/',agregar)
 router.delete('/:id',eliminar);
-router.put('/:id', actualizar);
+router.put('/', actualizar);
 
 
 async function todos(req,res,next){
@@ -38,7 +38,7 @@ async function uno(req,res,next){
 async function agregar(req,res,next){
     try{
         const items = await controlador.agregar(req.body);
-        if(req.body.exp_id == 0)
+        if(req.body.evi_id == 0)
             {
                 mensaje = 'Evidencia guardada con exito';
             }
@@ -57,7 +57,7 @@ async function actualizar(req, res, next) {
     try {
         const id = req.params.id;
         const data = req.body;
-        const result = await controlador.actualizar(id, data);
+        const result = await controlador.actualizar(req.body.evi_id, data);
         respuesta.success(req, res, 'Evidencia actualizada con éxito', 200);
     } catch (err) {
         next(err);
