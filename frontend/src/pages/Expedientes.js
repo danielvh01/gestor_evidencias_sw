@@ -157,18 +157,20 @@ function Expedientes() {
     }
   };
 
-  if (loading) return <p>Cargando expedientes...</p>;
+  if (loading) return <p className="text-center mt-5">Cargando expedientes...</p>;
 
   return (
-    <div>
-      <h1>Listado de expedientes</h1>
+    <div className="container my-4">
+      <h1 className="mb-4 text-center">Listado de Expedientes - DICRI</h1>
 
-      <div style={{ marginBottom: "15px" }}>
-        <button onClick={handleAbrirModalExpediente}>+ Nuevo Expediente</button>
-        <button onClick={exportarExpedientesExcel} style={{ marginLeft: "10px" }}>
+      <div className="mb-3 d-flex justify-content-center gap-2 flex-wrap">
+        <button className="btn btn-success" onClick={handleAbrirModalExpediente}>
+          + Nuevo Expediente
+        </button>
+        <button className="btn btn-primary" onClick={exportarExpedientesExcel}>
           Exportar Excel
         </button>
-        <button onClick={exportarExpedientesPDF} style={{ marginLeft: "10px" }}>
+        <button className="btn btn-danger" onClick={exportarExpedientesPDF}>
           Exportar PDF
         </button>
       </div>

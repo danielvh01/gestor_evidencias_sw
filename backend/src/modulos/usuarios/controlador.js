@@ -15,9 +15,9 @@ module.exports = function(dbinyectada){
         return db.todos(TABLA);
     }
 
-    function uno(id)
+    function uno(id,idColumn = 'usr_id')
     {
-        return db.uno(TABLA,id,'usr_id');
+        return db.uno(TABLA,id,idColumn);
     }
 
     async function agregar(body)

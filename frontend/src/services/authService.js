@@ -16,8 +16,12 @@ export async function login(usuario, password) {
       const token = response.data.body; // tu API devuelve el token aquí
       localStorage.setItem("token", token);
       localStorage.setItem("usuario", usuario);
-      const rol = await apiClient.get(`/auth/login/${usuario}`);
-      localStorage.setItem("rol",rol.body[0].au_id)
+      const user = await apiClient.get(`/auth/login/${usuario}`);
+      console.log("ID DE AU");
+      console.log(user.body[0].au_id);
+      console.log("FIN DE AU");
+      const getRol = await apiClient.get(`/usuarios/${user.body[0].au_id}`);
+      localStorage.setItem("rol",getRol.data.usr_activo)
       return { success: true, token };
     } else {
       return { success: false, message: "Usuario o contraseña inválidos" };
