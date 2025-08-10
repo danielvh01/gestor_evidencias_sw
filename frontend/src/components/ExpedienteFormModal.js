@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 function ExpedienteFormModal({ onClose, onSave, initialData }) {
-  // Inicializamos el estado con initialData, o con valores por defecto
   const [form, setForm] = useState({
     exp_id: 0,
     exp_fecha_registro: new Date().toISOString(),

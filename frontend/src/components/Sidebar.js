@@ -46,7 +46,7 @@ const Sidebar = ({ onLogout }) => {
             <strong>Usuario:</strong> {localStorage.getItem("usuario") || "Invitado"}
           </div>
           <div className="px-3 mb-3">
-            <strong>Rol:</strong> {localStorage.getItem("rol") || "-"}
+            <strong>Rol:</strong> -
           </div>
 
           <nav className="flex-grow-1 px-2">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import { login } from "../services/authService";
 import mplogo from '../assets/MP_logo.png';
 
@@ -24,20 +24,19 @@ function Login() {
   }
 
   return (
-    
     <div className="d-flex vh-100 justify-content-center align-items-center bg-light">
       <form
         onSubmit={handleSubmit}
         className="p-4 bg-white rounded shadow"
         style={{ width: "320px" }}
       >
-            <div style={{ textAlign: "center", marginBottom: 10 }}>
-            <img
-                src={mplogo}
-                alt="Logo"
-                style={{ width: 100, height: 70, display: "inline-block" }}
-            />
-            </div>
+        <div style={{ textAlign: "center", marginBottom: 10 }}>
+          <img
+            src={mplogo}
+            alt="Logo"
+            style={{ width: 100, height: 70, display: "inline-block" }}
+          />
+        </div>
         <h2 className="mb-4 text-center">Iniciar Sesión</h2>
 
         <div className="mb-3">

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
+import CrearUSer from "./pages/CrearUsuario";
 import Expedientes from "./pages/Expedientes";
 import Usuarios from "./pages/Usuarios";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -10,6 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/crearusuario" element={<CrearUSer />} />
         
         {/* Rutas protegidas */}
         <Route

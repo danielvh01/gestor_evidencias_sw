@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link} from "react-router-dom"; 
 import { getUsuarios, updateUsuario } from "../services/usuarioService";
 import UsuariosTable from "../components/UsuariosTable";
 import UsuarioForm from "../components/UsuarioForm";
@@ -62,8 +63,15 @@ function Usuarios() {
   if (loading) return <p>Cargando usuarios...</p>;
 
   return (
+
     <div>
       <h1>Gestión de Usuarios</h1>
+      <div className="mb-3 d-flex justify-content-right btn-sm gap-2 flex-wrap">
+      <Link to="/CrearUsuario" className="btn btn-secondary">
+            Crear usuario nuevo
+      </Link>
+
+      </div>
       <UsuariosTable
         usuarios={usuarios}
         onEditar={editarUsuario}
