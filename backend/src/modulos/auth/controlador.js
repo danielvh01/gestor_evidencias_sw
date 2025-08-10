@@ -44,8 +44,14 @@ module.exports = function(dbinyectada){
         return db.agregar(TABLA,authData);
     }
 
+    function uno(id)
+    {
+        return db.uno(TABLA,id,'au_usuario');
+    }
+
     return {
         agregar,
-        login
+        login,
+        uno
     }
 }

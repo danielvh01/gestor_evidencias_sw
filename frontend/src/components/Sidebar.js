@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../services/authService";
 
-const Sidebar = ({ user, onLogout }) => {
+const Sidebar = ({ onLogout }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+
+
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -47,7 +49,10 @@ const Sidebar = ({ user, onLogout }) => {
       {!collapsed && (
         <>
           <div style={{ marginBottom: "20px" }}>
-            <strong>Usuario:</strong> {user?.username || "Invitado"}
+            <strong>Usuario:</strong> {localStorage.getItem("usuario") || "Invitado"}
+          </div>
+          <div style={{ marginBottom: "20px" }}>
+            <strong>Rol:</strong> {localStorage.getItem("rol")}
           </div>
 
           <nav>
@@ -73,7 +78,7 @@ const Sidebar = ({ user, onLogout }) => {
 
           <button
             onClick={handleLogout}
-            style={{ marginTop: "auto", marginTop: "20px", width: "100%" }}
+            style={{  marginTop: "20px", width: "100%" }}
           >
             Cerrar sesión
           </button>

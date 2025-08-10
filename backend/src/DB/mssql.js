@@ -47,7 +47,7 @@ async function todos(tabla) {
 async function uno(tabla, id, idColumn = 'id') {
     try {
         const result = await pool.request()
-            .input('id', sql.Int, id)
+            .input('id',id)
             .query(`SELECT * FROM ${tabla} WHERE ${idColumn} = @id`);
         return result.recordset;
     } catch (err) {
