@@ -1,57 +1,38 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-lts
-    container_name: forense_sqlserver
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mc-dicri-db
     environment:
-      SA_PASSWORD: "StrongPassword123"
+      SA_PASSWORD: "7J((s&53qG7"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
     volumes:
-      - ./db:/var/opt/mssql/scripts
-    healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "StrongPassword123", "-Q", "SELECT 1"]
-      interval: 10s
-      retries: 4
-      start_period: 10s
+      - mssqldata:/var/opt/mssql
+      - ./mssqldb/script_inicio.sql:/tmp/script_inicio.sql
+      - ./mssqldb/init-db.sh:/tmp/init-db.sh
 
-  sql-init:
-    image: mcr.microsoft.com/mssql-tools
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mc-dicri-api
     depends_on:
-      sqlserver:
-        condition: service_healthy
-    entrypoint: >
-      /bin/bash -c "
-      echo 'Esperando SQL Server...';
-      sleep 10;
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P StrongPassword123 -d master -i /var/opt/mssql/scripts/script_inicio.sql
-      "
-    volumes:
-      - ./db:/var/opt/mssql/scripts
-
-  backend:
-    build: ./backend
-    container_name: forense_backend
-    environment:
-      - DB_HOST=sqlserver
-      - DB_PORT=1433
-      - DB_USER=forense_app_user
-      - DB_PASSWORD=AppUserPassword123
-      - DB_NAME=forense_app
+      - db
     ports:
-      - "3001:3001"
-    depends_on:
-      sql-init:
-        condition: service_completed_successfully
-    restart: always
+      - "4000:4000"
 
-  frontend:
-    build: ./frontend
-    container_name: forense_frontend
-    ports:
-      - "5173:5173"
+  front:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mc-dicri-front
     depends_on:
-      - backend
-    restart: always
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  mssqldata:

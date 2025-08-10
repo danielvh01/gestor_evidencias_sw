@@ -1,11 +1,11 @@
-FROM node:18
+FROM node:20.14.0-slim
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . .
 
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["node", "src/index.js"]

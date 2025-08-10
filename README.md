@@ -22,7 +22,7 @@ Repositorio del sistema de gestión de expedientes y evidencias desarrollado par
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
-- Puertos 1433 (SQL Server), 3000 (API), y 5173 (React) libres
+- Puertos 1433 (SQL Server), 4000 (API), y 8080 (React en NGINX) libres
 
 ---
 
