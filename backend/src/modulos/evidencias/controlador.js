@@ -1,4 +1,4 @@
-const TABLA = 'product';
+const TABLA = 'dcri_evidencia';
 
 
 
@@ -17,12 +17,12 @@ module.exports = function(dbinyectada){
 
     function uno(id)
     {
-        return db.uno(TABLA,id);
+        return db.uno(TABLA,id,'evi_id');
     }
 
     function agregar(body)
     {
-        return db.agregar(TABLA,body);
+        return db.agregar(TABLA,body, 'evi_expediente_id');
     }
 
     function actualizar(id, body) {

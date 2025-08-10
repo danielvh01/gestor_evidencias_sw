@@ -1,17 +1,20 @@
 const express = require('express');
 
 const respuesta = require('../../red/respuestas');
-
+const seguridad = require('./seguridad');
 const controlador = require('./index');
 
 const router = express.Router();
 
-router.get('/', todos);
+router.get('/', seguridad(), todos);
 router.get('/:id', uno);
 router.post('/',agregar)
-router.delete('/',eliminar);
+router.patch('/',agregar)
+router.delete('/:id',eliminar);
+router.put('/:id', actualizar);
 
-async function todos(req,res){
+
+async function todos(req,res,next){
     
     try{
         const items = await controlador.todos();
@@ -22,7 +25,7 @@ async function todos(req,res){
     }
 };
 
-async function uno(req,res){
+async function uno(req,res,next){
     try{
         const items = await controlador.uno(req.params.id);
         respuesta.success(req,res,items,200);
@@ -35,12 +38,12 @@ async function uno(req,res){
 async function agregar(req,res,next){
     try{
         const items = await controlador.agregar(req.body);
-        if(req.body.id == 0)
+        if(req.body.exp_id == 0)
             {
-                mensaje = 'Item guardado con exito';
+                mensaje = 'Evidencia guardada con exito';
             }
             else {
-                mensaje = 'Item actualizado con exito';
+                mensaje = 'Evidencia actualizada con exito';
 
             }
         respuesta.success(req,res,mensaje,200);
@@ -50,10 +53,23 @@ async function agregar(req,res,next){
     }
 };
 
+async function actualizar(req, res, next) {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const result = await controlador.actualizar(id, data);
+        respuesta.success(req, res, 'Evidencia actualizada con éxito', 200);
+    } catch (err) {
+        next(err);
+    }
+}
+
+
 async function eliminar(req,res,next){
     try{
-        const items = await controlador.eliminar(req.body);
-        respuesta.success(req,res,'Item eliminado satisfactoriamente',200);
+        const id = req.params.id;
+        const result = await controlador.eliminar(id);
+        respuesta.success(req,res,'Evidencia eliminada satisfactoriamente',200);
     }
     catch(err){
         next(err);

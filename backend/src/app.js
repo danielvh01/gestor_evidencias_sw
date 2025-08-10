@@ -2,11 +2,11 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const config = require('./config');
-const clientes = require('./modulos/clientes/rutas');
 const usuarios = require('./modulos/usuarios/rutas');
 const auth = require('./modulos/auth/rutas');
 const error = require('./red/errores');
-const productos = require('./modulos/productos/rutas');
+const expedientes = require('./modulos/expedientes/rutas');
+const evidencias = require('./modulos/evidencias/rutas');
 
 const app = express();
 
@@ -23,8 +23,9 @@ app.set('port', config.app.port);
 app.use(cors());
 
 // Rutas
-app.use('/api/clientes', clientes);
-app.use('/api/productos', productos);
+
+app.use('/api/evidencias', evidencias);
+app.use('/api/expedientes', expedientes);
 app.use('/api/usuarios', usuarios);
 app.use('/api/auth', auth);
 app.use(error);

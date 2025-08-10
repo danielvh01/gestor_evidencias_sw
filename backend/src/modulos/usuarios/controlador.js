@@ -23,17 +23,19 @@ module.exports = function(dbinyectada){
     async function agregar(body)
     {
         const usuario ={
-            usr_id: body.id,
-            usr_nombre_completo: body.nombre,
-            usr_rol_id: body.rol_id,
-            usr_activo: body.activo
+            usr_id: body.usr_id,
+            usr_nombre_completo: body.usr_nombre_completo,
+            usr_rol_id: body.usr_rol_id,
+            usr_activo: body.usr_activo
         }
-        const respuesta = await db.agregar(TABLA,usuario,'usr_id');
         var insertId = 0;
-        if(body.id == 0){
+
+        if(body.usr_id == 0){
+            const respuesta = await db.agregar(TABLA,usuario,'usr_id');
             insertId = respuesta;
         }else {
-            insertId = body.id;
+            insertId = body.usr_id;
+            var respuesta = await db.actualizar(TABLA,insertId,usuario,'usr_id');
         }
         var respuesta2 = '';
         if(body.usuario || body.password){

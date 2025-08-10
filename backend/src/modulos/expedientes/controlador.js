@@ -1,4 +1,4 @@
-const TABLA = 'clientes';
+const TABLA = 'dcri_expediente';
 
 
 
@@ -22,18 +22,23 @@ module.exports = function(dbinyectada){
 
     function agregar(body)
     {
-        return db.agregar(TABLA,body);
+        return db.agregar(TABLA,body, 'exp_id');
     }
 
-    function eliminar(body)
+    function actualizar(id, body) {
+        return db.actualizar(TABLA, id, body);
+    }
+
+    function eliminar(id)
     {
-        return db.eliminar(TABLA,body);
+        return db.eliminar(TABLA,id);
     }
 
     return {
         todos,
         uno,
         eliminar,
-        agregar
+        agregar,
+        actualizar
     }
 }
