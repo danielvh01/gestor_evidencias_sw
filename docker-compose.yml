@@ -13,6 +13,8 @@ services:
       - mssqldata:/var/opt/mssql
       - ./mssqldb/script_inicio.sql:/tmp/script_inicio.sql
       - ./mssqldb/init-db.sh:/tmp/init-db.sh
+    networks:
+      - appnet
 
   api:
     build:
@@ -23,6 +25,14 @@ services:
       - db
     ports:
       - "4000:4000"
+    environment:
+      - PORT=4000
+      - DB_HOST=db
+      - DB_USER=forense_app_user
+      - DB_PASSWORD=73>ysO72eQL0
+      - DB_NAME=forense_app
+    networks:
+      - appnet
 
   front:
     build:
@@ -33,6 +43,13 @@ services:
       - api
     ports:
       - "8080:80"
+    volumes:
+      - ./frontend/public/config.js:/usr/share/nginx/html/config.js
+    networks:
+      - appnet
+
+networks:
+  appnet:
 
 volumes:
   mssqldata:
